@@ -23,6 +23,15 @@ public class University {
         this.rating = rating;
     }
 
+    public University(String id, String fullName, String shortName,
+                      int yearOfFoundation, StudyProfile mainProfile) {
+        this.id = id;
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.yearOfFoundation = yearOfFoundation;
+        this.mainProfile = mainProfile;
+    }
+
     @Override
     public String toString() {
         return "University{" +
@@ -31,8 +40,6 @@ public class University {
                 ", shortName='" + shortName + '\'' +
                 ", yearOfFoundation=" + yearOfFoundation +
                 ", mainProfile=" + mainProfile +
-                ", quantityOfCampuses=" + quantityOfCampuses +
-                ", rating=" + rating +
                 '}';
     }
 
@@ -97,6 +104,8 @@ enum StudyProfile {
     CHEMISTRY ("Химия"),
     MEDICINE ("Медицина"),
     ECONOMY ("Экономика"),
+    LINGUISTICS ("Лингвистика"),
+    MATHEMATICS ("Математика"),
     MULTI ("Многопрофильный");
     public final String profileName;
     StudyProfile(String profileName) {
