@@ -1,4 +1,4 @@
-package ru.skillfactory;
+package ru.skillfactory.resources;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

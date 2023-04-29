@@ -1,4 +1,6 @@
-package ru.skillfactory;
+package ru.skillfactory.resources;
+
+import java.util.Objects;
 
 public class Student {
     private String fullName;
@@ -6,8 +8,10 @@ public class Student {
     private String department;
     private int currentCourseNumber;
     private float avgExamScore;
+
     public Student() {
     }
+
     public Student(String fullName, String universityId, String department,
                    int currentCourseNumber, float avgExamScore) {
         this.fullName = fullName;
@@ -66,7 +70,7 @@ public class Student {
         this.currentCourseNumber = currentCourseNumber;
     }
 
-    public float getAvgExamScore(float v) {
+    public float getAvgExamScore() {
         return avgExamScore;
     }
 

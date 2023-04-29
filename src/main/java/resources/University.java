@@ -1,4 +1,6 @@
-package ru.skillfactory;
+package ru.skillfactory.resources;
+
+import java.util.Objects;
 
 public class University {
     private String id;
@@ -97,18 +99,5 @@ public class University {
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-}
-enum StudyProfile {
-    PHYSICS ("Физика"),
-    CHEMISTRY ("Химия"),
-    MEDICINE ("Медицина"),
-    ECONOMY ("Экономика"),
-    LINGUISTICS ("Лингвистика"),
-    MATHEMATICS ("Математика"),
-    MULTI ("Многопрофильный");
-    public final String profileName;
-    StudyProfile(String profileName) {
-        this.profileName = profileName;
     }
 }
