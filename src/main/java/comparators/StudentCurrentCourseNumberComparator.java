@@ -1,6 +1,6 @@
-package ru.skillfactory.comparators;
+package comparators;
 
-import ru.skillfactory.resources.Student;
+import resources.Student;
 
 public class StudentCurrentCourseNumberComparator implements StudentComparator {
     @Override

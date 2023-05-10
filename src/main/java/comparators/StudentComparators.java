@@ -1,4 +1,4 @@
-package ru.skillfactory.comparators;
+package comparators;
 
 public enum StudentComparators {
     AVG_EXAM_SCORE_COMPARATOR,

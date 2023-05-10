@@ -1,6 +1,7 @@
-package ru.skillfactory.comparators;
+package comparators;
 
 public class ComporatorUtil {
+    private ComporatorUtil() {};
     public static StudentComparator getStudentComparator(StudentComparators studentComparator) {
         switch (studentComparator) {
             case AVG_EXAM_SCORE_COMPARATOR:

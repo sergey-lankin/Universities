@@ -1,4 +1,4 @@
-package ru.skillfactory.resources;
+package resources;
 
 public enum StudyProfile {
     PHYSICS ("Физика"),

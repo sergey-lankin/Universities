@@ -1,13 +1,15 @@
-package ru.skillfactory.resources;
+package resources;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 public class Student {
-    private String fullName;
-    private String universityId;
+    private @SerializedName(value = "studentFullName") String fullName;
+    private @SerializedName(value = "studentUniversity") String universityId;
     private String department;
-    private int currentCourseNumber;
-    private float avgExamScore;
+    private @SerializedName(value = "studentCourse") int currentCourseNumber;
+    private@SerializedName(value = "studentExamScore") float avgExamScore;
 
     public Student() {
     }

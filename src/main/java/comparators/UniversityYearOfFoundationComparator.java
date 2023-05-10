@@ -1,6 +1,6 @@
-package ru.skillfactory.comparators;
+package comparators;
 
-import ru.skillfactory.resources.University;
+import resources.University;
 
 public class UniversityYearOfFoundationComparator implements UniversityComparator {
     @Override

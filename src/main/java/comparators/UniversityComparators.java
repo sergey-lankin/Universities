@@ -1,4 +1,4 @@
-package ru.skillfactory.comparators;
+package comparators;
 
 public enum UniversityComparators {
     FULL_NAME_COMPARATOR,

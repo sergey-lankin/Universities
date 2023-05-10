@@ -1,7 +1,7 @@
-package ru.skillfactory.comparators;
+package comparators;
 
 import org.apache.commons.lang3.StringUtils;
-import ru.skillfactory.resources.Student;
+import resources.Student;
 
 public class StudentFullNameComparator implements StudentComparator {
     @Override
