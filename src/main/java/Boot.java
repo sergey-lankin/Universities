@@ -2,52 +2,55 @@ import comparators.StudentComparator;
 import comparators.UniversityComparator;
 import comparators.StudentComparators;
 import comparators.UniversityComparators;
-import reports.Statistics;
-import reports.StatisticsUtil;
-import reports.XlsWriter;
+import reports.*;
+import resources.InfoObject;
 import resources.ReadResources;
 import resources.Student;
 import resources.University;
 import comparators.ComporatorUtil;
 import json.JsonUtil;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 public class Boot {
-
+    private static final Logger logger = Logger.getLogger(Boot.class.getName());
     public static void main(String[] args) throws IOException {
-
+        LogManager.getLogManager().readConfiguration(Boot.class.getResourceAsStream("/logging.properties"));
+        logger.log(Level.INFO, "Запуск приложения произведен успешно.");
         List<Student> students = ReadResources.readStudents();
         List<University> universities = ReadResources.readUniversities();
-        String jsonStudents = JsonUtil.studentListSerialization(students);
-        String jsonUniversities = JsonUtil.universityListSerialization(universities);
-        System.out.println(jsonStudents);
-        System.out.println(jsonUniversities);
-        List<Student> newStudents = JsonUtil.studentListDeserialization(jsonStudents);
-        List<University> newUniversities = JsonUtil.universityListDeserialization(jsonUniversities);
 
-        if (newStudents.size() == students.size()) {System.out.println("Коллекция студентов десерелизована корректно");}
-        else {System.out.println("Коллекция студентов десерелизована некорректно");}
-        if (newUniversities.size() == universities.size()) {System.out.println("Коллекция университетов десерелизована корректно");}
-        else {System.out.println("Коллекция университетов десерелизована некорректно");}
-
-        students.stream()
-                .map(JsonUtil::studentSerialization)
-                .forEach(jsonStudent -> {
-                    System.out.println(jsonStudent);
-                    System.out.println(JsonUtil.studentDeserialization(jsonStudent));
-        });
-
+        UniversityComparator universityComparator =
+                ComporatorUtil.getUniversityComparator(UniversityComparators.YEAR_OF_FOUNDATION_COMPARATOR);
         universities.stream()
-                .map(JsonUtil::universitySerialization)
-                .forEach(jsonUniversity -> {
-                    System.out.println(jsonUniversity);
-                    System.out.println(JsonUtil.universityDeserialization(jsonUniversity));
-                });
+                .sorted(universityComparator);
+
+        StudentComparator studentComparator =
+                ComporatorUtil.getStudentComparator(StudentComparators.AVG_EXAM_SCORE_COMPARATOR);
+        students.stream()
+                .sorted(studentComparator);
+
+        students.stream().map(JsonUtil::studentSerialization);
+        universities.stream().map(JsonUtil::universitySerialization);
 
         List<Statistics> statisticsList = StatisticsUtil.createStatistics(students, universities);
         XlsWriter.createAndWriteTableToFile(statisticsList, "src/main/resources/statistics.xlsx");
+
+        InfoObject infoObject = new InfoObject();
+        infoObject.setStudentList(students);
+        infoObject.setUniversityList(universities);
+        infoObject.setStatisticsList(statisticsList);
+        infoObject.setCreatedAt(new Date());
+        XmlWriter.writeXmlFile(infoObject);
+        JsonWriter.writeJsonFile(infoObject);
+
+        logger.log(Level.INFO, "Приложение завершило свою работу.");
+
     }
 }
 

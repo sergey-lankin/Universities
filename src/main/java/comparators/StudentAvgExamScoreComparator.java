@@ -1,6 +1,10 @@
 package comparators;
 
+import reports.StatisticsUtil;
 import resources.Student;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StudentAvgExamScoreComparator implements StudentComparator {
     @Override

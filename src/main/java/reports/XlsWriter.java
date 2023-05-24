@@ -11,8 +11,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class XlsWriter {
+    public static final Logger logger = Logger.getLogger(XlsWriter.class.getName());
 
     public static void createAndWriteTableToFile(List<Statistics> statisticsList, String pathToFile) {
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -52,9 +55,12 @@ public class XlsWriter {
         try {
             FileOutputStream stream = new FileOutputStream(pathToFile);
             workbook.write(stream);
+            logger.log(Level.INFO, "Файл со статистикой сформирован успешно.");
         } catch (FileNotFoundException exception) {
+            logger.log(Level.SEVERE, "Путь для создания файла не найден.");
             exception.getMessage();
         } catch (IOException e) {
+            logger.log(Level.SEVERE, "Ошибка записи данных в файл.");
             e.getMessage();
         }
     }

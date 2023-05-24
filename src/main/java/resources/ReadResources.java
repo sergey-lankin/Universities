@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.*;
@@ -12,6 +14,7 @@ import org.apache.poi.xssf.usermodel.*;
 public class ReadResources {
     static ArrayList<Student> students;
     static ArrayList<University> universities;
+    public static final Logger logger = Logger.getLogger(ReadResources.class.getName());
     private ReadResources() {}
 
     public static Iterator<Row> readCatalog(String filePath, String sheetName) {
@@ -21,11 +24,14 @@ public class ReadResources {
             XSSFSheet sheet = workbook.getSheet(sheetName);
             Iterator<Row> iterator = sheet.iterator();
             iterator.next();
+            logger.log(Level.INFO, "Файл прочитан успешно.");
             return iterator;
         } catch (FileNotFoundException exception) {
+            logger.log(Level.SEVERE, "Файл с информацией об университетах отсутствует!");
             exception.getMessage();
         }
         catch (IOException exception) {
+            logger.log(Level.SEVERE, "Ошибка формирования потока! Проверьте корректность формата файла.");
             exception.getMessage();
         }
         return null;
@@ -43,6 +49,7 @@ public class ReadResources {
             Student student = new Student(studentName, universityId, courseNumber, avgScore);
             students.add(student);
         }
+        logger.log(Level.INFO, "Коллекция студентов сформирована.");
         return students;
     }
 
@@ -62,9 +69,10 @@ public class ReadResources {
                         universityYearOfFoundation, mainProfile);
                 universities.add(university);
             } catch (IllegalArgumentException ex) {
-                System.out.println("Профиль " + profile + " отсутствует в перечислении. Объект университета не был создан.");
+                logger.log(Level.WARNING, "В перечислении отсутсвует требуемый профиль образования. Выберите доступный.");
             }
         }
+        logger.log(Level.INFO, "Коллекция университетов сформирована.");
         return universities;
     }
 }

@@ -1,6 +1,7 @@
 package json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import reports.Statistics;
 import resources.Student;
 import resources.University;
 import java.util.List;
@@ -27,6 +28,12 @@ public class JsonUtil {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String universityJson = gson.toJson(universities);
         return universityJson;
+    }
+
+    public static String statisticsListSerialization(List<Statistics> statistics) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String statisticsJson = gson.toJson(statistics);
+        return statisticsJson;
     }
     public static Student studentDeserialization(String studentJson) {
         Gson gson = new GsonBuilder().create();
